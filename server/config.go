@@ -2,9 +2,8 @@ package main
 
 import (
 	"errors"
-	"os"
 
-	_ "github.com/joho/godotenv/autoload"
+	"os"
 )
 
 type Config struct {
@@ -21,8 +20,8 @@ func LoadConfig() (*Config, error) {
 	cfg := &Config{
 		DB: PostgresConfig{
 			Username: os.Getenv("POSTGRES_USER"),
-			Password: os.Getenv("POSTGRES_PASSWORD"),
-			Name:     os.Getenv("POSTGRES_NAME"),
+			Password: os.Getenv("POSTGRES_PW"),
+			Name:     os.Getenv("POSTGRES_DB"),
 		},
 	}
 

@@ -20,41 +20,16 @@ import {
 import { startTransition, useEffect, useOptimistic, useState } from "react";
 import NewAlbumDialog from "./newAlbumDialog";
 import { Delete } from "@mui/icons-material";
+import {
+  createInitialAlbums,
+  deleteSelectedAlbums,
+} from "../functions/getAlbums";
 
 export interface Album {
   album_id: string;
   album_title: string;
   artist_name: string;
   retail_price: number;
-}
-
-async function createInitialAlbums(): Promise<Album[]> {
-  const response = await fetch("/albums", {
-    method: "GET",
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    console.log(data);
-
-    return data;
-  }
-
-  console.log("something went wrong...");
-  throw console.error(`${response}`);
-}
-
-async function deleteSelectedAlbums(selected: number[]) {
-  const numDelete = selected.toString();
-  const response = await fetch("/albums/" + numDelete, {
-    method: "DELETE",
-  });
-
-  if (response.ok) {
-    console.log("response gooded");
-  } else {
-    console.log("reseponse bad");
-  }
 }
 
 const sortRows = (

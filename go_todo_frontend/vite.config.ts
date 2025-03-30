@@ -7,10 +7,12 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      "/album": {
-        target: "http://localhost:8080",
+      "/albums": {
+        target: "http://server:8080",
         changeOrigin: true,
       },
     },
+    host: true,
+    allowedHosts: ["client"],
   },
 });

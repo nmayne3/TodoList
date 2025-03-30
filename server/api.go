@@ -18,8 +18,16 @@ func connectToDB() (*sql.DB, error) {
 		return nil, err
 	}
 	DB := Config.DB
-	connString := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", DB.Username, DB.Password, DB.Name)
+	connString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", "postgres", 5432, DB.Username, DB.Password, DB.Name)
 	db, err := sql.Open("postgres", connString)
+	if err == nil {
+		fmt.Printf("Connected to database!!!")
+	}
+	if err != nil {
+		fmt.Printf("Fuck my stupid life. Database failed to connect")
+		fmt.Printf("%s", err.Error())
+
+	}
 	return db, err
 }
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,12 +23,14 @@ func main() {
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
 	router.DELETE("/albums/:id", deleteAlbum)
+	router.DELETE("/albums", deleteAlbum)
 
-	router.Run("localhost:8080")
+	router.Run()
 }
 
 // getAlbums responds with the list of all albums as JSON.
 func getAlbums(c *gin.Context) {
+	fmt.Printf("Get albums endpoint accessed\n")
 	redisClient := redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",

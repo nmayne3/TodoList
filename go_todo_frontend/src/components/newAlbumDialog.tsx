@@ -13,31 +13,7 @@ import { startTransition, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Album } from "./albumsList";
-
-const postAlbum = async (
-  album_title: string,
-  artist_name: string,
-  retail_price: number
-): Promise<Album> => {
-  console.log("posty initiated");
-  const result = await fetch("/albums", {
-    method: "POST",
-    body: JSON.stringify({
-      album_title: album_title,
-      artist_name: artist_name,
-      retail_price: retail_price,
-    }),
-    headers: { "Content-type": "application/json" },
-  });
-  if (result.ok) {
-    console.log("Album posted!");
-    const data = await result.json();
-    console.log(data);
-    return data;
-  } else {
-    throw new Error("Album failed to post...");
-  }
-};
+import { postAlbum } from "../functions/getAlbums";
 
 const NewAlbumDialog = ({
   albums,
